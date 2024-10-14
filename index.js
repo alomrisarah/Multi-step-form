@@ -4,6 +4,13 @@ const form = document.getElementById("form")
 const planCards = document.querySelectorAll(".plan__card")
 const addsonCards = document.querySelectorAll(".addon__card")
 const changePlanBtn = document.getElementById("change-plan")
+//showStep(x): Handles which step is shown and updates the sidebar and buttons accordingly. Depending on the step (stepNum):
+//Step 0: Hides the "previous" button.
+//Step 1-3: Shows the next step button, updates sidebar progress.
+//Step 4: Hides navigation buttons after final confirmation.
+//nextBtn and prevBtn: Handle navigation through the steps using stepNum.
+
+
 // empty object to store selected plan, price and duration
 let selectedPlan = {}
 // function for storing selected add-on plan
@@ -302,6 +309,8 @@ const renderTotal = () => {
  })
 
  // inner html for total
+ //If planDuration = "Yearly", it will return "Year"
+ //"Month" becomes "month" and "Year" becomes "year" the result will be "$20/month"
  total.innerHTML = `<span>Total(
     per ${planDuration.slice(0, -2).toLocaleLowerCase()}) </span> 
       <span> $${totalAmount}/${selectedPlan.planDur}</span>`
@@ -309,7 +318,7 @@ const renderTotal = () => {
 
 // function to handle change button
 changePlanBtn.addEventListener("click", () => {
- // reassign stepNum to 0
+ // reassign stepNum to plan card
  stepNum = 1
  // show stepNum
  showStep(stepNum)
